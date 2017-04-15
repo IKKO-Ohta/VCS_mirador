@@ -1,0 +1,15 @@
+class CreateComments < ActiveRecord::Migration[5.0]
+  def change
+    create_table :comments do |t|
+      t.text :content
+      t.references :user, foreign_key: true
+      t.integer :type
+      t.boolean :plzReply
+      t.references :ReplyID, foreign_key: true
+      t.boolean :deleted
+
+      t.timestamps
+    end
+    add_index :comments,[:user_id,created_at]
+  end
+end

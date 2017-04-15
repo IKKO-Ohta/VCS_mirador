@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  book: one
+  type: 1
+  plzReply: false
+  ReplyID: 1
+  deleted: false
+
+two:
+  content: MyText
+  book: two
+  type: 1
+  plzReply: false
+  ReplyID: 1
+  deleted: false
