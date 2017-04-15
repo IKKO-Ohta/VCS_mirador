@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get '/booklist', to: 'books#index'
   resources :users
   resources :books
+  resources :comments
 end

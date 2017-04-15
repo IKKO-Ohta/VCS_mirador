@@ -3,7 +3,10 @@ class BooksController < ApplicationController
     @books = Book.all
   end
   def show
-    @book = Book.find(params[:id]) 
+    @book = Book.find(params[:id])
+    @comment = @book.comments.build if logged_in?
+    @comment.user = current_user
+    @comments = @book.comments.paginate(page: params[:page])
   end
 
   def new

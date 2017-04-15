@@ -1,1 +1,22 @@
-<%= @book.name %>, <%= @book.uri %>
+<% provide(:title, @book.name) %>
+<div class="row">
+  <bookside class="col-md-4">
+    <section class="book_info">
+      <h1>
+        <%= @book.name %>
+      </h1>
+      <%= @book.uri %>
+      <%= render 'shared/comment_form' %>
+      <%= cookies.signed[:user_id] %>
+    </section>
+  </bookside>
+  <div class="col-md-8">
+    <% if @book.comments.any? %>
+      <h3>comments (<%= @book.comments.count %>)</h3>
+      <ol class="comments">
+        <%= render @comments %>
+      </ol>
+      <%= will_paginate @comments %>
+    <% end %>
+  </div>
+</div>

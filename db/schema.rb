@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413065748) do
+ActiveRecord::Schema.define(version: 20170414093515) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
     t.string   "uri"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.string   "user"
+    t.integer  "book_id"
+    t.integer  "type"
+    t.boolean  "plzReply"
+    t.integer  "ReplyID"
+    t.boolean  "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "created_at"], name: "index_comments_on_book_id_and_created_at"
+    t.index ["book_id"], name: "index_comments_on_book_id"
   end
 
   create_table "users", force: :cascade do |t|
