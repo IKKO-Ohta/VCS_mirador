@@ -5,13 +5,13 @@ function getManifestUri() {
   var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\.r/g);
   var shapeUrlString = shapeUrl.toString();
   var addiiif = shapeUrlString.replace('/ark:/', '/iiif/ark:/');
-  var manifestUri = addiiif.replace('.r', '/manifest.json');
+  var manifestUri = addiiif.replace('/\.[\w]+/', '/manifest.json');
   var encodeManifestUri = encodeURIComponent(manifestUri);
 
   var request = new window.XMLhttpRequest();
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200){
-      var manifestJson = JSON.parse(request.reponseText);
+      var manifestJson = JSON.parse(request.responseText);
       alert(manifestJson);
     }
   request.open('GET', 'encodeManifestUri', true);
