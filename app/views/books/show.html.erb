@@ -6,7 +6,7 @@
         <%= @book.name %>
       </h1>
       <%= @book.uri %>
-      <%= render 'shared/comment_form' %>
+      <%= render 'shared/comment_form', book: @book %>
     </section>
   </bookside>
   <div class="col-md-8">
