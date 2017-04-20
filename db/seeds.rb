@@ -14,9 +14,8 @@ User.create!(name:  "Example User",
              password_confirmation: "foobar",
              admin: true)
 
-Book.create!(name:'twenty21 collection',
-             uri:'http://www2.dhii.jp/nijl/NIJL0002/110_1755/manifest.json'
-             )
+Book.create!(name:'À LA RECHERCHE DU TEMPS PERDU',
+             uri:'http://gallica.bnf.fr/iiif/ark:/12148/btv1b53077216n/manifest.json')
 
 
 99.times do |n|
