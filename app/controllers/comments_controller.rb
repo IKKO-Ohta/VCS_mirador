@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :current_user
   def create
-    @comment = Book.first.comments.build(comment_params)
+    @book = Book.find(comment_params[:book_id])
+    @comment = @book.comments.build(comment_params)
     @comment.user = current_user.name
     if @comment.save
       flash[:success] = "comment created!"
@@ -15,6 +16,6 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content,:book_id)
     end
 end
