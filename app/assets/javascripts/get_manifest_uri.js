@@ -2,7 +2,7 @@
 var geturl = document.getElementById('url');
 geturl.onclick = getManifestUri
 function getManifestUri() {
-  var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\.r/g);
+  var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\./g);
   var shapeUrlString = shapeUrl.toString();
   var addiiif = shapeUrlString.replace('/ark:/', '/iiif/ark:/');
   var manifestUri = addiiif.replace('/[\.|\?|\w]+/', '/manifest.json');
