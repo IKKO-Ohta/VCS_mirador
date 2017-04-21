@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :books
   resources :comments
   resources :microposts,          only: [:create, :destroy]
+  resources :relationships,       only: [:create, :destroy]
 end
