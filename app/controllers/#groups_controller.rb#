@@ -1,0 +1,17 @@
+class GroupsController < ApplicationController
+  def create
+    @group = Group.new(params[:group])
+    @group.users << current_user
+    if @group.save
+      # ... etc
+    end
+  end
+
+  def update
+    @group = Group.find(params[:group_id])
+    @user = User.find(params[:user_id])
+    @group.users << @user unless @group.users.include? @user
+    end
+  end
+
+end
