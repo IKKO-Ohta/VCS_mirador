@@ -5,7 +5,7 @@ function getManifestUri() {
   var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\./g);
   var shapeUrlString = shapeUrl.toString();
   var addiiif = shapeUrlString.replace('/ark:/', '/iiif/ark:/');
-  var manifestUri = addiiif.replace('/[\.|\?|\w]+/', '/manifest.json');
+  var manifestUri = addiiif.replace('/\.[\?|\w]+/', '/manifest.json');
   var encodeManifestUri = encodeURIComponent(manifestUri);
 
   var request = new window.XMLhttpRequest();
