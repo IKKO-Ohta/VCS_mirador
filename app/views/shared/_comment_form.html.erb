@@ -4,5 +4,6 @@
     <%= f.text_area :content, placeholder: 'Compose new comment...' %>
   </div>
   <%= f.hidden_field :book_id, :value => @book.id %>
+  <%= f.select :CommentType, { "Annotation" => 0, "idea" => 1, "hypothesis" => 2}, class: "myclass" %>
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

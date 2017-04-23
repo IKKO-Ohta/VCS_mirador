@@ -1,0 +1,5 @@
+class RenameTypeColumnToBooks < ActiveRecord::Migration[5.0]
+  def change
+    rename_column :books, :type, :CommentType
+  end
+end

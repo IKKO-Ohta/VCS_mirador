@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422073700) do
+ActiveRecord::Schema.define(version: 20170423155829) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
@@ -24,33 +24,14 @@ ActiveRecord::Schema.define(version: 20170422073700) do
     t.text     "content"
     t.string   "user"
     t.integer  "book_id"
-    t.integer  "type"
+    t.integer  "CommentType"
     t.boolean  "plzReply"
     t.integer  "ReplyID"
     t.boolean  "deleted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["book_id", "created_at"], name: "index_comments_on_book_id_and_created_at"
     t.index ["book_id"], name: "index_comments_on_book_id"
-  end
-
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "membership_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["membership_id"], name: "index_groups_on_membership_id"
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_memberships_on_group_id"
-    t.index ["user_id", "created_at"], name: "index_Memberships_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "microposts", force: :cascade do |t|
