@@ -1,6 +1,5 @@
 // Gettting manifest_uri
-var geturl = document.getElementById('url');
-geturl.onclick = getManifestUri
+
 function getManifestUri() {
   var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\./g);
   var shapeUrlString = shapeUrl.toString();
@@ -12,9 +11,24 @@ function getManifestUri() {
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200){
       var manifestJson = JSON.parse(request.responseText);
-      alert(manifestJson);
+      document.write(manifestJson) ;
     }
   request.open('GET', 'encodeManifestUri', true);
   request.send(null);
   };
+
+  var originData = JSON.stringify(request.responseText);
+  var endPointCanvases = originData.indexOf('canvases');
+  var endPointImages = originData.indexOf('images', endPointCanvases);
+  var endPointResource = originData.indexOf('resource', endPointImages);
+  var endPointBracket = originData.indexOf('},', endPointResource);
+  var resource = originData.substring(endPointResource, endPointBracket);
+  var endPointId = resource.indexOf('@id');
+  var endPointQmark = resource.lastIndexOf('"');
+  var substringId = resource.substring(endpointId, endPointQmark);
+  var idUri = substringId.match(/http:\/\/[\w/:\.]+\/f1/g);
+  var infoJson = idUri + '/info.json';
+  document.write(infoJson);
 }
+var geturl = document.getElementById('url');
+geturl.onclick = getManifestUri
