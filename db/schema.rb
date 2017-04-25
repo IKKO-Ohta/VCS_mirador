@@ -10,14 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170423155829) do
+ActiveRecord::Schema.define(version: 20170425055100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-=======
-ActiveRecord::Schema.define(version: 20170425052731) do
->>>>>>> feature/views_new
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170425052731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "isLocked"
+    t.json     "body"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -35,17 +32,10 @@ ActiveRecord::Schema.define(version: 20170425052731) do
     t.boolean  "plzReply"
     t.integer  "ReplyID"
     t.boolean  "deleted"
-<<<<<<< HEAD
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["book_id", "created_at"], name: "index_comments_on_book_id_and_created_at", using: :btree
     t.index ["book_id"], name: "index_comments_on_book_id", using: :btree
-=======
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id", "created_at"], name: "index_comments_on_book_id_and_created_at"
-    t.index ["book_id"], name: "index_comments_on_book_id"
->>>>>>> feature/views_new
   end
 
   create_table "microposts", force: :cascade do |t|
