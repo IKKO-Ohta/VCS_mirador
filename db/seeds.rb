@@ -15,7 +15,7 @@ User.create!(name:  "Example User",
              admin: true)
 
 Book.create!(name:'À LA RECHERCHE DU TEMPS PERDU',
-             uri:'http://gallica.bnf.fr/iiif/ark:/12148/btv1b53077216n/manifest.json')
+             url:'http://gallica.bnf.fr/iiif/ark:/12148/btv1b53077216n/manifest.json')
 
 
 99.times do |n|
