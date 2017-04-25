@@ -1,7 +1,7 @@
 // Gettting manifest_uri
 
 function getManifestUri() {
-  var shapeUrl = Url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\./g);
+  var shapeUrl = url.match(/http:\/\/[\w/:\(\)~\.=\+\-]+\./g);
   var shapeUrlString = shapeUrl.toString();
   var addiiif = shapeUrlString.replace('/ark:/', '/iiif/ark:/');
   var manifestUri = addiiif.replace('/\.[\?|\w]+/', '/manifest.json');
@@ -11,7 +11,6 @@ function getManifestUri() {
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200){
       var manifestJson = JSON.parse(request.responseText);
-      document.write(manifestJson) ;
     }
   request.open('GET', 'encodeManifestUri', true);
   request.send(null);
@@ -28,7 +27,7 @@ function getManifestUri() {
   var substringId = resource.substring(endpointId, endPointQmark);
   var idUri = substringId.match(/http:\/\/[\w/:\.]+\/f1/g);
   var infoJson = idUri + '/info.json';
-  document.write(infoJson);
+  return infoJson;
 }
 var geturl = document.getElementById('url');
 geturl.onclick = getManifestUri
