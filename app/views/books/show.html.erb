@@ -6,6 +6,8 @@
         <%= @book.name %>
       </h1>
       <%= @book.url %>
+      <!-- @book.body returns manifestjson!! -->
+      <%= javascript_include_tag "openseadragon" %>
       <%# javascript_path "get_manifest_uri"%>  <!--this will receive the ManifestJson -->
       <%= render 'shared/comment_form', book: @book %>
     </section>
