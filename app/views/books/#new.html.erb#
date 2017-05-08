@@ -1,0 +1,19 @@
+<%=  provide(:title, 'Adding a Document') %>
+<h1>Adding a Document</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@book) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.label :url, "Please past your URL" %>
+      <%= f.text_field :url, class: 'form-control' %>
+      
+      
+      <%= f.label :islocked? %>
+      <%= f.check_box(:isLocked ,{},checked_value = "true",unchecked_value = "false" )%>
+      <%= f.submit "Add it", class: "btn btn-primary", id: "url" %>
+    <% end %>
+  </div>
+</div>

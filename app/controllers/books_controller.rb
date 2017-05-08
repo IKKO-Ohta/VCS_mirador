@@ -1,13 +1,15 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class BooksController < ApplicationController
   def index
     @books = Book.all
   end
 
   def create
-  end
-
-  def create
     @book = Book.new(book_params)
+    @book.body = fetch(@book.url)
     if @book.save
       flash[:success] = "Request accepted!!"
       redirect_to @book
@@ -37,5 +39,15 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:name, :url, :isLocked, :body)
   end
+
+  def fetch(url)
+    #preprocessed str
+    gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+
+    encodeManifestUri = URI.escape(gallica)
+    uri = URI.parse(encodeManifestUri)
+    json = Net::HTTP.get(uri)
+    result_json_data = JSON.parse(json)
+  end  
 
 end
