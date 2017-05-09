@@ -5,7 +5,7 @@
       <h1>
         <%= @book.name %>
       </h1>
-      <%= openseadragon_picture_tag "http://gallica.bnf.fr/iiif/ark:/12148/btv1b53144038x/f1/info.json" %>      
+      <%= openseadragon_picture_tag @book.tile %>      
       <%= render 'shared/comment_form', book: @book %>
     </section>
   </bookside>
