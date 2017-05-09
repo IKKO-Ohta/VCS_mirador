@@ -5,6 +5,7 @@ require 'json'
 class BooksController < ApplicationController
   def index
     @books = Book.all
+    picture_tag 'kitten.jpg'
   end
 
   def create

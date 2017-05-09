@@ -6,8 +6,30 @@
         <%= @book.name %>
       </h1>
       <%= @book.url %>
-      <!-- @book.body returns manifestjson!! -->
-      <%= javascript_include_tag "openseadragon" %>
+      picture_tag 'kitten.jpg'
+      <!-- @book.body returns manifestjson!!
+      <script type="text/javascript">
+var viewer =    OpenSeadragon({
+    preserveViewport: true,
+    visibilityRatio:    1,
+    minZoomLevel:       1,
+    defaultZoomLevel:   1,
+    sequenceMode:       true,
+    tileSources:   [{
+      "@context": "http://library.stanford.edu/iiif/image-api/1.1/context.json",
+      "@id": "http://gallica.bnf.fr/iiif/ark%3A%2F12148%2Fbtv1b53144038x%2Ff1",
+      "height": 8080,
+      "width": 11960,
+      "profile": [ "http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2" ],
+      "protocol": "http://iiif.io/api/image",
+      "tiles": [{
+        "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
+        "width": 1024
+      }]
+    },
+    ]
+    }); </script>
+-->
       <%= @header %>
       <%= render 'shared/comment_form', book: @book %>
     </section>
