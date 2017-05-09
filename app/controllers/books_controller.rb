@@ -20,6 +20,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @header = essential(@book.body)
+    gon.header = @header
     @comment = @book.comments.build if logged_in?
     @comments = @book.comments.paginate(page: params[:page])
   end
@@ -49,5 +51,25 @@ class BooksController < ApplicationController
     json = Net::HTTP.get(uri)
     result_json_data = JSON.parse(json)
   end  
+
+  def essential(body)
+    originData = JSON.generate(body)
+    endPointCanvases = originData.index('canvases')
+    endPointImages = originData.index('images', endPointCanvases)
+    endPointResource = originData.index('resource', endPointImages)
+    endPointBracket = originData.index('},', endPointResource)
+    resource = originData.slice(endPointResource, endPointBracket)
+    endPointId = resource.index('@id')
+    endPointQmark = resource.rindex('"')
+    substringId = resource.slice(endPointId, endPointQmark)
+    matchIdUri = substringId.scan(/http:\/\/[\w\/:\.]+\/f1/)
+    idUri = matchIdUri[0]
+    infoJson = idUri.concat("/info.json")
+
+    encodeManifestUri = URI.escape(infoJson)
+    uri = URI.parse(encodeManifestUri)
+    json = Net::HTTP.get(uri)
+    result_json_data = JSON.parse(json)
+  end
 
 end
