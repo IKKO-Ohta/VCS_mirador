@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @header = essential(@book.body)
     gon.header = @header
-    @comment = @book.comments.build if logged_in?
+    @comment = @book.comments.build
     @comments = @book.comments.paginate(page: params[:page])
   end
 
