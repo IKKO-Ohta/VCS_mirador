@@ -71,5 +71,4 @@ class BooksController < ApplicationController
     json = Net::HTTP.get(uri)
     result_json_data = JSON.parse(json)
   end
-
 end

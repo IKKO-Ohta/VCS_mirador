@@ -7,6 +7,34 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'net/http'
+require 'uri'
+require 'json'
+
+  def fetch(url)
+    #preprocessed str                                                                                                                                         
+    gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+
+    encodeManifestUri = URI.escape(gallica)
+    uri = URI.parse(encodeManifestUri)
+    json = Net::HTTP.get(uri)
+    result_json_data = JSON.parse(json)
+  end
+
+  def essential(body)
+    originData = JSON.generate(body)
+    endPointCanvases = originData.index('canvases')
+    endPointImages = originData.index('images', endPointCanvases)
+    endPointResource = originData.index('resource', endPointImages)
+    endPointBracket = originData.index('},', endPointResource)
+    resource = originData.slice(endPointResource, endPointBracket)
+    endPointId = resource.index('@id')
+    endPointQmark = resource.rindex('"')
+    substringId = resource.slice(endPointId, endPointQmark)
+    matchIdUri = substringId.scan(/http:\/\/[\w\/:\.]+\/f1/)
+    idUri = matchIdUri[0]
+    infoJson = idUri.concat("/info.json")
+  end
 
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -14,9 +42,11 @@ User.create!(name:  "Example User",
              password_confirmation: "foobar",
              admin: true)
 
-Book.create!(name:'À LA RECHERCHE DU TEMPS PERDU',
-             url:'http://gallica.bnf.fr/iiif/ark:/12148/btv1b53077216n/manifest.json')
-
+@book = Book.new(name:'The birds of America',
+             url:'http://gallica.bnf.fr/ark:/12148/btv1b53144038x?rk=21459;2')
+@book.body = fetch(@book.url)
+@book.tile = essential(@book.body)
+@book.save
 
 99.times do |n|
   name  = Faker::Name.name
@@ -47,3 +77,4 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
