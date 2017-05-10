@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.body = fetch(@book.url)
+    @book.tile = essential(@book.body)  
     if @book.save
       flash[:success] = "Request accepted!!"
       redirect_to @book
@@ -20,8 +21,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @header = essential(@book.body)
-    gon.header = @header
     @comment = @book.comments.build
     @comments = @book.comments.paginate(page: params[:page])
   end
@@ -43,17 +42,17 @@ class BooksController < ApplicationController
   end
 
   def fetch(url)
-    #preprocessed str
+    #preprocessed str                                                                                                                                              
     gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
 
     encodeManifestUri = URI.escape(gallica)
     uri = URI.parse(encodeManifestUri)
     json = Net::HTTP.get(uri)
     result_json_data = JSON.parse(json)
-  end  
+  end
 
   def essential(body)
-    originData = JSON.generate(body.to_json)
+    originData = JSON.generate(body)
     endPointCanvases = originData.index('canvases')
     endPointImages = originData.index('images', endPointCanvases)
     endPointResource = originData.index('resource', endPointImages)
@@ -65,11 +64,5 @@ class BooksController < ApplicationController
     matchIdUri = substringId.scan(/http:\/\/[\w\/:\.]+\/f1/)
     idUri = matchIdUri[0]
     infoJson = idUri.concat("/info.json")
-
-    encodeManifestUri = URI.escape(infoJson)
-    uri = URI.parse(encodeManifestUri)
-    json = Net::HTTP.get(uri)
-    result_json_data = JSON.parse(json)
   end
-
 end
