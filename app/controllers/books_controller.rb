@@ -53,7 +53,7 @@ class BooksController < ApplicationController
   end  
 
   def essential(body)
-    originData = JSON.generate(body)
+    originData = JSON.generate(body.to_json)
     endPointCanvases = originData.index('canvases')
     endPointImages = originData.index('images', endPointCanvases)
     endPointResource = originData.index('resource', endPointImages)
