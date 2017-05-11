@@ -1,6 +1,6 @@
 <% provide(:title, @book.name) %>
 <div class="row">
-  <bookside class="col-md-4">
+  <bookside class="col-md-6">
     <section class="book_info">
       <h1>
         <%= @book.name %>
@@ -9,7 +9,7 @@
       <%= render 'shared/comment_form', book: @book %>
     </section>
   </bookside>
-  <div class="col-md-8">
+  <div class="col-md-6">
     <% if @book.comments.any? %>
       <h3>comments (<%= @book.comments.count %>)</h3>
       <ol class="comments">
