@@ -11,30 +11,30 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-  def fetch(url)
-    #preprocessed str                                                                                                                                         
-    gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+def fetch(url)
+  #preprocessed str                                                                                                                                         
+  gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
 
-    encodeManifestUri = URI.escape(gallica)
-    uri = URI.parse(encodeManifestUri)
-    json = Net::HTTP.get(uri)
-    result_json_data = JSON.parse(json)
-  end
+  encodeManifestUri = URI.escape(gallica)
+  uri = URI.parse(encodeManifestUri)
+  json = Net::HTTP.get(uri)
+  result_json_data = JSON.parse(json)
+end
 
-  def essential(body)
-    originData = JSON.generate(body)
-    endPointCanvases = originData.index('canvases')
-    endPointImages = originData.index('images', endPointCanvases)
-    endPointResource = originData.index('resource', endPointImages)
-    endPointBracket = originData.index('},', endPointResource)
-    resource = originData.slice(endPointResource, endPointBracket)
-    endPointId = resource.index('@id')
-    endPointQmark = resource.rindex('"')
-    substringId = resource.slice(endPointId, endPointQmark)
-    matchIdUri = substringId.scan(/http:\/\/[\w\/:\.]+\/f1/)
-    idUri = matchIdUri[0]
-    infoJson = idUri.concat("/info.json")
-  end
+def essential(body)
+  originData = JSON.generate(body)
+  endPointCanvases = originData.index('canvases')
+  endPointImages = originData.index('images', endPointCanvases)
+  endPointResource = originData.index('resource', endPointImages)
+  endPointBracket = originData.index('},', endPointResource)
+  resource = originData.slice(endPointResource, endPointBracket)
+  endPointId = resource.index('@id')
+  endPointQmark = resource.rindex('"')
+  substringId = resource.slice(endPointId, endPointQmark)
+  matchIdUri = substringId.scan(/http:\/\/[\w\/:\.]+\/f1/)
+  idUri = matchIdUri[0]
+  infoJson = idUri.concat("/info.json")
+end
 
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -59,11 +59,10 @@ User.create!(name:  "Example User",
 end
 
 books = Book.order(:created_at).take(1)
-50.times do
+50.times do |n|
   content = Faker::Lorem.sentence(5)
-  books.each { |book| book.comments.create!(content: content,user:'testuser') }
+  books.each { |book| book.comments.create!(content: content,user_id:n) }
 end
-
 
 users = User.order(:created_at).take(6)
 50.times do
@@ -77,4 +76,3 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
-

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   def create
     @book = Book.find(comment_params[:book_id])
     @comment = @book.comments.build(comment_params)
-    @comment.user = current_user.name
+    @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = "comment created!"
       redirect_to controller:'books',action: 'show',id: @comment.book.id

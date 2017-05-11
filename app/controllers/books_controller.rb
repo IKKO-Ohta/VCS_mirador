@@ -22,7 +22,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @comment = @book.comments.build
-    @comments = @book.comments.paginate(page: params[:page])
+    @comments = @book.comments.paginate(page: params[:page], :per_page => 8)
   end
 
   def new
