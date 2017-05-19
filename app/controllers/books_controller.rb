@@ -42,7 +42,13 @@ class BooksController < ApplicationController
   end
 
   def fetch(url)
-    #preprocessed str                                                                                                                                              
+    #preprocessed str
+#    if /http:\/\/gallica\.bnf\.fr\/ark:\/12148\/.+[\.|\?]/ =~ url then
+# gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+# 
+#else
+#  othermanifestUri = url.gsub!(/ark:/, 'iiif/ark:').concat("/manifest.json")
+#end
     gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
 
     encodeManifestUri = URI.escape(gallica)
