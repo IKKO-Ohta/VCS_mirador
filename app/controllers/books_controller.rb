@@ -49,9 +49,15 @@ class BooksController < ApplicationController
 #else
 #  othermanifestUri = url.gsub!(/ark:/, 'iiif/ark:').concat("/manifest.json")
 #end
-    gallica = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/).join.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+    if /http:\/\/gallica\.bnf\.fr\/ark:\/12148\/.+[\.|\?]/ =~ url then
+      shapeUrl = url.scan(/http:\/\/[\w\/:\(\)~\.=\+\-]+[\.|\?]/)
+      shapeUrlToString = shapeUrl.join
+      manifestUri = shapeUrlToString.gsub!(/ark:/, 'iiif/ark:').gsub!(/([\.\?]\w*\d*)$/, '/manifest.json')
+    else
+      manifestUri = url.gsub!(/ark:/, 'iiif/ark:').concat("/manifest.json")
+    end
 
-    encodeManifestUri = URI.escape(gallica)
+    encodeManifestUri = URI.escape(manifestUri)
     uri = URI.parse(encodeManifestUri)
     json = Net::HTTP.get(uri)
     result_json_data = JSON.parse(json)
