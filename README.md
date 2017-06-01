@@ -1,6 +1,5 @@
 VCS_mirador
 ====
-![login](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/login.gif)
 ![all_doc](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/all_documents_comments.gif) 
 ![fetch](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/adding_documents.gif)
 ## 名前について
@@ -28,7 +27,7 @@ Adding a Documentのページでは、あなたが手元で管理したい資料
 現在は試験的に、Miradorの元となっているOpenSeadragonにて実装がなされています。段階的に、Miradorに移行していく予定です. 
 現在は個人のみで資料を管理するようになっていますが、段階的にグループで同じ資料と資料への注釈を管理できるようにしていく予定です.  
 現在、利用できる図書館はGallicaだけですが、DPLAやEuropeanaといった図書館に対応していく予定です.  
-本番環境のメモリ不足でOSD gemが動かない状態が続いています。対応策を検討中です。 
+**本番環境のメモリ不足でOSD gemが動かない状態が続いています。対応策を検討中です。 **
 
 ## Author
 IKKO Ohta 
