@@ -1,7 +1,8 @@
 VCS_mirador
 ====
-![result](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/all_documents_comments.gif) 
-
+![login](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/login.gif)
+![all_doc](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/all_documents_comments.gif) 
+![fetch](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/adding_documents.gif)
 ## 名前について
 VCS-Miradorは、ソフトウェア開発で用いられる分散システム管理（Version Control System）を、電子資料のビュワーであるMiradorと組み合わせることで新しい人文学の共同研究の形を提案したいという思いを込めて名付けられました。　
 
@@ -22,3 +23,13 @@ Adding a Documentのページでは、あなたが手元で管理したい資料
 
 
 新しい資料を追加すると、自動的にコメントページに移ります。コメントはannotation、idea、hypothesisの３種類から選ぶことができます。annotationは、書かれている内容の事実確認や、翻刻など、資料の考証のためにコメントつける時に使います。ideaはannotationでの蓄積から、これまでの解釈とは違った資料の見方ができる場合にその着想をメモするところです。最後のhypothesisはideaの中から新しい理論が立ち上がりそうな時に、annotationやideaを統合して、それについて考察を書くところです。ただし、これは研究の場面に合わせて異なった用い方をしても問題ありません。研究に最適なツールの使用をお勧めします。 
+
+## TODO 
+現在は試験的に、Miradorの元となっているOpenSeadragonにて実装がなされています。段階的に、Miradorに移行していく予定です. 
+現在は個人のみで資料を管理するようになっていますが、段階的にグループで同じ資料と資料への注釈を管理できるようにしていく予定です.  
+現在、利用できる図書館はGallicaだけですが、DPLAやEuropeanaといった図書館に対応していく予定です.  
+本番環境のメモリ不足でOSD gemが動かない状態が続いています。対応策を検討中です。 
+
+## Author
+IKKO Ohta 
+MASANAO Satoh 
