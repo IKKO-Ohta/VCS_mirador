@@ -32,4 +32,4 @@ Adding a Documentのページでは、あなたが手元で管理したい資料
 
 ## Author
 IKKO Ohta  
-MASANAO Satoh  
+MASANAO Sato 
