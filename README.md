@@ -1,5 +1,11 @@
 VCS_mirador
 ====
+## Beta Version Blue Print
+![stackandBuf](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/stackbuffer.png)
+![treegram1](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/treegram1.png)
+![treegram2](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/treegram2.png)
+
+## old version
 ![all_doc](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/all_documents_comments.gif) 
 ![fetch](https://github.com/IKKO-Ohta/VCS_mirador/blob/master/adding_documents.gif)
 ## 名前について
